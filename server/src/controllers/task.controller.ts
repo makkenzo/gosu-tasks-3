@@ -20,10 +20,10 @@ export const getTaskById = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Task not found' });
         }
 
-        res.status(200).json(task);
+        return res.status(200).json(task);
     } catch (err) {
         console.error('Error fetching task by ID:', err);
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 };
 
@@ -48,10 +48,10 @@ export const createTask = async (req: Request, res: Response) => {
 
         await task.save();
 
-        res.status(201).json({ message: 'Task created successfully' });
+        return res.status(201).json({ message: 'Task created successfully' });
     } catch (error) {
         console.error('Error creating task:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 };
 
@@ -66,10 +66,10 @@ export const updateTask = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Task not found' });
         }
 
-        res.status(200).json(updatedTask);
+        return res.status(200).json(updatedTask);
     } catch (err) {
         console.error('Error updating task:', err);
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 };
 
@@ -83,9 +83,9 @@ export const deleteTask = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Task not found' });
         }
 
-        res.status(204).send(); // 204 No Content
+        return res.status(204).send(); // 204 No Content
     } catch (err) {
         console.error('Error deleting task:', err);
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 };

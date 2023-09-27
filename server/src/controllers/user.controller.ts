@@ -20,16 +20,16 @@ export const registerUser = async (req: Request, res: Response) => {
 
         const user = new UserModel({
             username,
-            hashedPassword,
+            password: hashedPassword,
             role: role || 'user',
         });
 
         await user.save();
 
-        res.status(201).json({ message: 'User registered successfully' });
+        return res.status(201).json({ message: 'User registered successfully' });
     } catch (err) {
         console.error('Error registering user:', err);
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 };
 
@@ -61,9 +61,9 @@ export const loginUser = async (req: Request, res: Response) => {
             expiresIn: '1h', // Продолжительность жизни токена
         });
 
-        res.status(200).json({ token, userId: user._id, username: user.username });
+        return res.status(200).json({ token, userId: user._id, username: user.username });
     } catch (error) {
         console.error('Error logging in user:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 };

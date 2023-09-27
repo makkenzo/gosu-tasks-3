@@ -16,20 +16,20 @@ export const createComment = async (req: Request, res: Response) => {
 
         await comment.save();
 
-        res.status(201).json({ message: 'Comment created successfully' });
+        return res.status(201).json({ message: 'Comment created successfully' });
     } catch (error) {
         console.error('Error creating comment:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 };
 
 export const getAllComments = async (req: Request, res: Response) => {
     try {
         const comments = await CommentModel.find();
-        res.status(200).json(comments);
+        return res.status(200).json(comments);
     } catch (error) {
         console.error('Error fetching comments:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 };
 
@@ -42,10 +42,10 @@ export const getCommentById = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Comment not found' });
         }
 
-        res.status(200).json(comment);
+        return res.status(200).json(comment);
     } catch (error) {
         console.error('Error fetching comment by ID:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 };
 
@@ -60,10 +60,10 @@ export const updateComment = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Comment not found' });
         }
 
-        res.status(200).json(updatedComment);
+        return res.status(200).json(updatedComment);
     } catch (error) {
         console.error('Error updating comment:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 };
 
@@ -77,9 +77,9 @@ export const deleteComment = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Comment not found' });
         }
 
-        res.status(204).send(); // 204 No Content
+        return res.status(204).send(); // 204 No Content
     } catch (error) {
         console.error('Error deleting comment:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 };
