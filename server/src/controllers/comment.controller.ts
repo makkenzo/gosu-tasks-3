@@ -3,15 +3,16 @@ import CommentModel from '../models/comment.model';
 
 export const createComment = async (req: Request, res: Response) => {
     try {
-        const { author, text } = req.body;
+        const { author, text, taskId } = req.body;
 
-        if (!author || !text) {
-            return res.status(400).json({ message: 'Author and text are required' });
+        if (!author || !text || !taskId) {
+            return res.status(400).json({ message: 'Author, text, and taskId are required' });
         }
 
         const comment = new CommentModel({
-            author, // Здесь предполагается, что `author` - это ID пользователя
+            author,
             text,
+            taskId,
         });
 
         await comment.save();

@@ -7,7 +7,6 @@ export interface TaskDocument extends Document {
     priority: string;
     type: string;
     description: string;
-    comments: mongoose.Types.ObjectId[];
     createdAt: Date;
 }
 
@@ -18,7 +17,6 @@ const taskSchema = new Schema<TaskDocument>({
     priority: { type: String, required: true },
     type: { type: String, required: true },
     description: { type: String, required: true },
-    comments: [{ type: mongoose.Types.ObjectId, ref: 'Comment' }],
     createdAt: { type: Date, default: Date.now },
 });
 

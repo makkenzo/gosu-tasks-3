@@ -1,17 +1,19 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import { Schema, model, Document, Types } from 'mongoose';
 
-export interface CommentDocument extends Document {
-    author: mongoose.Types.ObjectId;
+interface CommentDocument extends Document {
+    author: Types.ObjectId;
     text: string;
+    taskId: Types.ObjectId;
     createdAt: Date;
 }
 
 const commentSchema = new Schema<CommentDocument>({
-    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     text: { type: String, required: true },
+    taskId: { type: Schema.Types.ObjectId, ref: 'Task', required: true },
     createdAt: { type: Date, default: Date.now },
 });
 
-const CommentModel = mongoose.model<CommentDocument>('Comment', commentSchema);
+const CommentModel = model<CommentDocument>('Comment', commentSchema);
 
 export default CommentModel;

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import TaskModel from '../models/task.model';
+import CommentModel from '../models/comment.model';
 
 export const getAllTasks = async (req: Request, res: Response) => {
     try {
@@ -83,9 +84,11 @@ export const deleteTask = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Task not found' });
         }
 
+        await CommentModel.deleteMany({ taskId });
+
         return res.status(204).send(); // 204 No Content
-    } catch (err) {
-        console.error('Error deleting task:', err);
+    } catch (error) {
+        console.error('Error deleting task:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
