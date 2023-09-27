@@ -6,7 +6,7 @@ const commentRouter = Router();
 commentRouter.post('/create', CommentController.createComment);
 commentRouter.get('/', CommentController.getAllComments);
 commentRouter.get('/:id', CommentController.getCommentById);
-commentRouter.put('/:id', CommentController.updateComment);
+// commentRouter.put('/:id', CommentController.updateComment);
 commentRouter.delete('/:id', CommentController.deleteComment);
 
 export default commentRouter;

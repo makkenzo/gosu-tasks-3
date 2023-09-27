@@ -50,23 +50,23 @@ export const getCommentById = async (req: Request, res: Response) => {
     }
 };
 
-export const updateComment = async (req: Request, res: Response) => {
-    try {
-        const commentId = req.params.id;
-        const updateData = req.body;
+// export const updateComment = async (req: Request, res: Response) => {
+//     try {
+//         const commentId = req.params.id;
+//         const updateData = req.body;
 
-        const updatedComment = await CommentModel.findByIdAndUpdate(commentId, updateData, { new: true });
+//         const updatedComment = await CommentModel.findByIdAndUpdate(commentId, updateData, { new: true });
 
-        if (!updatedComment) {
-            return res.status(404).json({ message: 'Comment not found' });
-        }
+//         if (!updatedComment) {
+//             return res.status(404).json({ message: 'Comment not found' });
+//         }
 
-        return res.status(200).json(updatedComment);
-    } catch (error) {
-        console.error('Error updating comment:', error);
-        return res.status(500).json({ message: 'Internal server error' });
-    }
-};
+//         return res.status(200).json(updatedComment);
+//     } catch (error) {
+//         console.error('Error updating comment:', error);
+//         return res.status(500).json({ message: 'Internal server error' });
+//     }
+// };
 
 export const deleteComment = async (req: Request, res: Response) => {
     try {
